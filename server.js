@@ -12,14 +12,30 @@ const userRoutes = require("./routes/userRoutes")
 const app = express()
 const L_PORT = 5000
 
-app.use(express.static(path.join(__dirname, "client/build")))
+app.enable("trust proxy")
+
 app.use(logger(":date[iso]"))
 app.use(logger("dev"))
 app.use(logger(":user-agent"))
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
+//CORS bypass
+app.use(function(req, res, next) {
+    //must be included these first two
+    res.setHeader("Access-Control-Allow-Origin", "*")
+    res.setHeader(
+        "Access-Control-Allow-Headers",
+        "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
+    )
+    res.setHeader("Access-Control-Allow-Credentials", "true")
+    res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT")
+    next()
+})
+
 app.use(cookieParser())
+app.use(express.static(path.join(__dirname, "client/build")))
 
 // Routes
 
