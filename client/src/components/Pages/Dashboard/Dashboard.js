@@ -19,7 +19,7 @@ const Dashboard = () => {
     })
 
     useEffect(() => {
-        fetch("https://teambuild-api.herokuapp.com/user")
+        fetch("/user")
             .then(res => res.json())
             .then(user => {
                 auth.isAdmin(user)

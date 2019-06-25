@@ -39,7 +39,7 @@ const Register = ({ history }) => {
         if (email && firstname && lastname && password && confPw) {
             if (password.length >= 8) {
                 if (password === confPw) {
-                    fetch("https://teambuild-api.herokuapp.com/user/register", {
+                    fetch("/user/register", {
                         method: "post",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({

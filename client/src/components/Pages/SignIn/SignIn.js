@@ -22,7 +22,7 @@ const SignIn = () => {
     const submitSignin = () => {
         if (email && password) {
             try {
-                fetch("https://teambuild-api.herokuapp.com/user/login", {
+                fetch("/user/login", {
                     method: "post",
                     credentials: "same-origin",
                     headers: { "Content-Type": "application/json" },
